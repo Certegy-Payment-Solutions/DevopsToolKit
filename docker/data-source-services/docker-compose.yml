@@ -2,11 +2,11 @@
 # Everything ahead of the last two digits are standard for the given service
 #
 # Network name is st-{service name}-{service MAJOR.MINOR}
----
+version: '3.8'
 services:
   nginxproxy:
-# Enable nginx debug and increase output verbosity
-#    command: [nginx-debug, '-g', 'daemon off;']
+    # Enable nginx debug and increase output verbosity
+    #    command: [nginx-debug, '-g', 'daemon off;']
     image: jwilder/nginx-proxy
     container_name: sourcetoad_nginx_proxy
     ports:
@@ -20,7 +20,7 @@ services:
     image: mariadb:10.11
     container_name: sourcetoad_mariadb1011
     ports:
-      - "33111:3306"
+      - "33111:3311"
     environment:
       - MYSQL_ROOT_PASSWORD=root
       - MYSQL_USER=mariadb_user
@@ -32,6 +32,28 @@ services:
     container_name: sourcetoad_mariadb106
     ports:
       - "33106:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_USER=mariadb_user
+      - MYSQL_PASSWORD=mariadb_pass
+    networks:
+      - st-internal
+  mariadb105:
+    image: mariadb:10.5
+    container_name: sourcetoad_mariadb105
+    ports:
+      - "33105:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_USER=mariadb_user
+      - MYSQL_PASSWORD=mariadb_pass
+    networks:
+      - st-internal
+  mariadb104:
+    image: mariadb:10.4
+    container_name: sourcetoad_mariadb104
+    ports:
+      - "33104:3306"
     environment:
       - MYSQL_ROOT_PASSWORD=root
       - MYSQL_USER=mariadb_user
